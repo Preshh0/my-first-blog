@@ -9,24 +9,26 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}"> <!-- The css file comes last because the most authoritative link or file should be the last. It is a rule of thumb.-->
     </head>
     <body>
-        <header class="page-header">
-          <div class="container">
+          <div class="page-header">
                 {% if user.is_authenticated %}
                     <a href="{% url 'post_new' %}" class="top-menu">
-                        {% include './icons/file-earmark-plus.svg' %}
+                        <span class="glyphicon glyphicon-plus"></span>
                         <!-- Add New Post -->
                     </a>
-                {% endif %}
+                    <a href="{% url 'post_list' %}" class="top_menu"> <span class="glyphicon glyphicon-edit"></span></a>
+                    <p class="top-menu"> Hello {{ user.username }} </p>
+                {% else %}    
+                    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"> </span></a>
+                    {% endif %}
               <h1><a href="/">Django Girls Blog</a></h1>
           </div>
-        </header>
-        <main class="container">
+        <div class="content container">
             <div class="row">
-                <div class="col">
+                <div class="col-md-8">
                 {% block content %}
                 {% endblock %}
                 </div>
             </div>
-        </main>
+        </div>
     </body>
 </html>
